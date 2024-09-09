@@ -1,11 +1,13 @@
 package com.example_hotel.hotel_reservation.model;
 
+import com.example_hotel.hotel_reservation.dto.NovaReservaDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.util.Date;
 
 
@@ -41,4 +43,13 @@ public class Reserva {
     @Column(name = "data_criacao")
     @Temporal(TemporalType.TIMESTAMP)
     private Date data_criacao;
+
+    public Reserva(NovaReservaDTO dto) {
+        this.id_cliente = dto.id_cliente();
+        this.id_quarto = dto.id_quarto();
+        this.data_checkin = dto.data_checkin();
+        this.data_checkout  = dto.data_checkout();
+        this.status_reserva = dto.status_reserva();
+        this.data_criacao = Date.from(Instant.now());
+    }
 }
